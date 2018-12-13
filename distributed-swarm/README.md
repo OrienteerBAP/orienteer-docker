@@ -11,16 +11,16 @@
 | config/automatic-backup.json              | OrientDB automatic backup config file              |
 
 
-> For understand how to work with OrientDB configuration for distributed mode, please see (OrientDB Scaling)[https://orientdb.com/docs/last/Distributed-Architecture.html "OrientDB Scaling"].
+> For understand how to work with OrientDB configuration for distributed mode, please see [OrientDB Scaling](https://orientdb.com/docs/last/Distributed-Architecture.html "OrientDB Scaling").
 
 
 #### Usage
 For use current `docker-compose.yml`, please use this guide.
 1. Your `dockerd` must have enabled remote API
-    Orienteer uses (hazelcast-docker-swarm-discovery-spi)[https://github.com/bitsofinfo/hazelcast-docker-swarm-discovery-spi] for detect Orienteer nodes inside Docker Swarm cluster, so `dockerd` must have enabled remote API for HTTP or HTTPS communication.
-    * See about Docker deamon socket (Docker docs)[https://docs.docker.com/engine/reference/commandline/dockerd/#daemon-socket-option]
-    * Modify systemd config for Docker deamon. (Example)[https://success.docker.com/article/how-do-i-enable-the-remote-api-for-dockerd]
-    * For using TLS with Docker deamon socket see (Docker docs)[https://docs.docker.com/engine/security/https/]
+    Orienteer uses [hazelcast-docker-swarm-discovery-spi](https://github.com/bitsofinfo/hazelcast-docker-swarm-discovery-spi) for detect Orienteer nodes inside Docker Swarm cluster, so `dockerd` must have enabled remote API for HTTP or HTTPS communication.
+    * See about Docker deamon socket [Docker docs](https://docs.docker.com/engine/reference/commandline/dockerd/#daemon-socket-option)
+    * Modify systemd config for Docker deamon. [Example](https://success.docker.com/article/how-do-i-enable-the-remote-api-for-dockerd)
+    * For using TLS with Docker deamon socket see [Docker docs](https://docs.docker.com/engine/security/https/)
 2. Initialize Docker Swarm manager
     * Execute `docker swarm init --advertise-addr ${host}`, where `${host}` is ip address of machine where command is executes
 3. Modify `docker-compose.yml`
@@ -31,4 +31,4 @@ For use current `docker-compose.yml`, please use this guide.
 4. Deploy Docker stack with specified `docker-compose.yml`
     * Execute `docker stack deploy --compose-file docker-compose.yml orienteer`
 
-> For more options see (hazelcast-docker-swarm-discovery-spi)[https://github.com/bitsofinfo/hazelcast-docker-swarm-discovery-spi] and (Orienteeer)[https://github.com/OrienteerBAP/Orienteer]
+> For more options see [hazelcast-docker-swarm-discovery-spi](https://github.com/bitsofinfo/hazelcast-docker-swarm-discovery-spi] and (Orienteeer)[https://github.com/OrienteerBAP/Orienteer)
