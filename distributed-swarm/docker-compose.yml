@@ -1,0 +1,60 @@
+version: '3.5'
+
+services:
+    app:
+        image: orienteer
+        networks:
+            - orienteer_network
+        deploy:
+            replicas: 1
+            update_config:
+                delay: 10s
+                parallelism: 1
+            restart_policy:
+                condition: none
+        environment:
+            - PORT=8080
+            - DISTRIBUTED=true
+            - DOCKER_SWARM=true
+            - ORIENTDB_ADMIN_PASSWORD=admin
+            - DOCKER_HOST=http://192.168.2.110:2375
+            - ORIENTDB_CONFIGURATION_HAZELCAST=/app/config/hazelcast-docker.xml
+            - JAVA_OPTS=-DdockerNetworkNames=orienteer_network -DhazelcastPeerPort=5701 -DdockerServiceNames=orienteer_app -DswarmMgrUri=http://192.168.2.110:2375 -DhazelcastInterface=10.0.0.*
+        configs:
+            - source: hazelcast_config
+              target: /app/config/hazelcast-docker.xml
+            - source: events_config
+              target: /app/config/events.json
+            - source: orientdb_config
+              target: /app/config/default-distributed-db-config.json
+            - source: orientdb_backup_config
+              target: /app/config/backups.json
+            - source: orientdb_automatic_backup_config
+              target: /app/config/automatic-backup.json
+        ports:
+            - 8080:8080
+            - 2424:2424
+            - 2480:2480
+        command: ./run.sh
+
+networks:
+    orienteer_network:
+        driver: overlay
+        attachable: true
+        name: orienteer_network
+
+volumes:
+    orienteer_runtime:
+        name: orienteer_runtime
+
+configs:
+    hazelcast_config:
+        file: ./config/hazelcast-docker.xml
+    events_config:
+        file: ./config/events.json
+    orientdb_config:
+        file: ./config/default-distributed-db-config.json
+    orientdb_backup_config:
+        file: ./config/backups.json
+    orientdb_automatic_backup_config:
+        file: ./config/automatic-backup.json
