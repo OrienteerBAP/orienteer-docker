@@ -31,4 +31,4 @@ For use current `docker-compose.yml`, please use this guide.
 4. Deploy Docker stack with specified `docker-compose.yml`
     * Execute `docker stack deploy --compose-file docker-compose.yml orienteer`
 
-> For more options see [hazelcast-docker-swarm-discovery-spi](https://github.com/bitsofinfo/hazelcast-docker-swarm-discovery-spi] and (Orienteeer)[https://github.com/OrienteerBAP/Orienteer)
+> For more options see [hazelcast-docker-swarm-discovery-spi](https://github.com/bitsofinfo/hazelcast-docker-swarm-discovery-spi) and [Orienteeer](https://github.com/OrienteerBAP/Orienteer)
